@@ -1,0 +1,3 @@
+#directories to ignore
+bower_components/
+node_modules/
