@@ -1,1 +1,0 @@
-var blogApp = angular.module('blogApp', ['ngRoute', 'ngResource']);

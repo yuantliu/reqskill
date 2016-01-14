@@ -9,7 +9,7 @@
   "moduleType": [
     "node"
   ],
-  "homepage": "http://reqskills.com",
+  "homepage": "http://reqskill.com",
   "private": true,
   "ignore": [
     "**/.*",
