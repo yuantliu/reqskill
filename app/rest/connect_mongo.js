@@ -7,8 +7,8 @@ mongoose.connect('mongodb://localhost/test', function (err, res) {
 	}
 });
 
-//pass in the second object specifying the colection name
-//might have something to do with the fact that this database didnt exist before
+//pass in the second object specifying the collection name
+//might have something to do with the fact that this collection didnt exist before
 var blogSchema = new Schema({
 	title: String,
 	date: {type: Date, default: Date.now},
@@ -18,8 +18,6 @@ var blogSchema = new Schema({
 	collection: 'entry'
 });
 
-var blog = mongoose.model('MyEntry', blogSchema);
+var BlogEntry = mongoose.model('MyEntry', blogSchema);
 
-module.exports = {
-    blog: blog
-}
+module.exports = BlogEntry;
