@@ -6,8 +6,8 @@ module.exports = {
 	getEntry : function (res) {
 		blog.find({}).exec(function (err, result) {
 			if (!err) {
-				var i = JSON.stringify(result);
-				res.end(i);
+				var i = JSON.stringify({"data": result});
+                res.end(i)
 			} else {
                 res.send("Cannot fetch blog JSON from API");
             }
@@ -34,8 +34,8 @@ module.exports = {
                 console.log("Error");
                 res.send(err);
             } else {
-                console.log("Success");
-                res.send(data)
+                console.log("{data: " + data + "}");
+                res.send("{data: " + data + "}")
             }
         })
     }

@@ -1,0 +1,45 @@
+<html ng-app="blogApp">
+
+<head>
+    <script src="../lib/angular.js"></script>
+    <script src="../lib/angular-route.min.js"></script>
+    <script src="../lib/angular-resource.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap.css" />
+
+    <script src="../js/angularapp.js"></script>
+    <script src="../js/controller.js"></script>
+    <script src="../js/routes.js"></script>
+    <script src="../js/directives.js"></script>
+    <script src="../js/services.js"></script>
+</head>
+
+<body>
+
+    <!-- Top navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Title -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Reqskills: the blog</a>
+            </div>
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="blog/newpost">New post (Admin only)</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div ng-view>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
