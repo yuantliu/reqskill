@@ -1,4 +1,3 @@
-//ROUTE
 blogApp.config(['$routeProvider', function (routeProvider) {
 	routeProvider
 		.when('/', {
@@ -6,8 +5,10 @@ blogApp.config(['$routeProvider', function (routeProvider) {
 			controller: 'blogController'
 		})
         .when('/newPost', {
-            templateUrl: '/public/html/newentry.html',
-            controller: 'newPostController'
+            templateUrl: '/public/html/newentry.html'
+        })
+        .when('/login'), {
+            templateUrl: 'public/html/login.html'  
         })
 		.otherwise({
 			redirectTo: '/'

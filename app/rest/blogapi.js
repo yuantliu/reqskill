@@ -31,11 +31,11 @@ module.exports = {
         
         newentry.save(function(err, data){
             if(err){
-                console.log("Error");
-                res.send(err);
+                console.log("Error during Blog POSTing");
+                console.log(err);
             } else {
                 console.log("{data: " + data + "}");
-                res.send("{data: " + data + "}")
+                res.redirect("http://localhost:3000/public/html/main.html");
             }
         })
     }

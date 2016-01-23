@@ -4,7 +4,7 @@ blogApp.service('mainBlogService', ['$location', '$resource',
 	
         //return all entries
         this.get = function () {
-            var url = "http://" + location.host() + ':' + location.port() + api.blogGet;
+            var url = api.blogGet;
             var blogJSON = resource(url);
 
             return blogJSON.get();
