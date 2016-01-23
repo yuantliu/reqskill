@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 module.exports = {
 	getEntry : function (res) {
-		blog.find({}).exec(function (err, result) {
+		blog.find({}).sort({date: -1}).exec(function (err, result) {
 			if (!err) {
 				var i = JSON.stringify({"data": result});
                 res.end(i)
