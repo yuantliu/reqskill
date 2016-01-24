@@ -4,6 +4,7 @@
     <script src="../public/lib/angular.js"></script>
     <script src="../public/lib/angular-route.min.js"></script>
     <script src="../public/lib/angular-resource.min.js"></script>
+    <script src="../public/lib/angular-cookies.min.js"></script>
     <script src="../public/lib/jquery.min.js"></script>
     <script src="../public/lib/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../public/lib/bootstrap.css" />
@@ -26,8 +27,8 @@
             </div>
             <!-- Links -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#newPost">New post (Admin only)</a></li>
+                <ul class="nav navbar-nav navbar-right" ng-controller="topBarLoginController">
+                    <li><a href="#newPost">{{login_text}}</a></li>
                 </ul>
             </div>
         </div>

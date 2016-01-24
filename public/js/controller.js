@@ -12,3 +12,10 @@ blogApp.controller('blogController', ['$scope', '$location', 'mainBlogService', 
 blogApp.controller('newPostController', ['$scope', function(scope){
     console.log("In post page");
 }]);
+
+//topbar controller
+//parse cookies: if username and password are incorrect, wipe cookie, say "Login"
+//otherwise: say "New Post"
+blogApp.controller('topBarLoginController', ['$scope', '$cookies', function(scope, cookie){
+    scope.login_text = "Login in here!";
+}]);

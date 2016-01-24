@@ -13,11 +13,12 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: false}));
 //static files
 app.use('/public', express.static(__dirname + '/public'));
-
+//cookie parser
+app.use(cookieParser());
 
 
 //routes
-var blogapi = require('./app/routes/blog_main.js');
+var blogapi = require('./app/routes/blog_main');
 blogapi(app);
 
 

@@ -6,13 +6,15 @@ module.exports = function (grunt) {
 				stoponerror: false,
 				relaxerror: []
 			},
-			files: ['html/*.html']
+			files: ['app/rest/*', 'app/routes/*', 'public/html/*', 'public/js/*']
 		},
         
         concat:{
             angular: {
                 files: {
-                    'public/lib/angular.min.js': ['bower_components/angular/angular.js']
+                    'public/lib/angular.min.js': ['bower_components/angular/angular.js'],
+                    'public/lib/angular-cookies.min.js': ['bower_components/angular-cookies/angular-cookies.min.js'],
+                    'public/lib/angular-resource.min.js': ['bower_components/angular-resource/angular-resource.min.js']
                 }
             },
             jquery: {
@@ -33,5 +35,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-bootlint');
     grunt.loadNpmTasks('grunt-contrib-concat');
 
-	grunt.registerTask('default', ['bootlint', 'concat']);
+	grunt.registerTask('default', ['concat']);
+    grunt.registerTask('lint', ['bootlint']);
 };

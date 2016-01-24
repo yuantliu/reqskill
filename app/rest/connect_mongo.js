@@ -18,6 +18,14 @@ var blogSchema = new Schema({
 	collection: 'entry'
 });
 
-var BlogEntry = mongoose.model('MyEntry', blogSchema);
+var userSchema = new Schema({
+    user: String,
+    password: String
+}, {
+    collection: 'user' 
+});
 
-module.exports = BlogEntry;
+var BlogEntry = mongoose.model('MyEntry', blogSchema);
+var User = mongoose.model('User', userSchema);
+
+module.exports = { "BlogEntry": BlogEntry, "User": User };

@@ -7,7 +7,7 @@ blogApp.config(['$routeProvider', function (routeProvider) {
         .when('/newPost', {
             templateUrl: '/public/html/newentry.html'
         })
-        .when('/login'), {
+        .when('/login', {
             templateUrl: 'public/html/login.html'  
         })
 		.otherwise({
