@@ -2,10 +2,6 @@ var domain = require('./../domain/variables');
 var blogApi = require('./../rest/blogapi');
 var userApi = require('./../rest/userapi');
 
-var path = require('path');
-var cookie = require('cookie-parser');
-var crypto = require('crypto');
-
 var client = require('request-json').createClient(domain.domain);
 
 
@@ -43,14 +39,13 @@ module.exports = function(app){
     
     
 	//login check
-	//login?user=u&pw=p
-    app.get('/blog/login', function(req, res){
+	//login?user=u&pw=p&hashed=0
+    app.get('/blog/auth', function(req, res){
 		var user = req.query.user;
 		var password = req.query.pw;
-		console.log(password + domain.salt);
-		password = crypto.Hash('sha256').update(password + domain.salt).digest('hex');
-		console.log(password);
-		userApi.userLogin(res, user, password);
+		var hashed = req.query.hashed;
+		
+		userApi.validateLogin(res, user, password, hashed);
 	});
     
 };
