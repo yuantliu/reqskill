@@ -16,8 +16,7 @@
     <script src="../public/js/services.js"></script>
 </head>
 
-<body>
-
+<body ng-controller="topBarLoginController">
     <!-- Top navbar -->
     <nav class="navbar navbar-default">
         <div class="container">
@@ -27,8 +26,8 @@
             </div>
             <!-- Links -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right" ng-controller="topBarLoginController">
-                    <li><a href="#newPost">{{login_text}}</a></li>
+                <ul class="nav navbar-nav navbar-right" cache-view="false">
+                    <li><a href="{{link}}">{{link_text}}</a></li>
                 </ul>
             </div>
         </div>

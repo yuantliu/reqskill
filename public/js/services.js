@@ -1,13 +1,41 @@
 //use REST API to get blog entries
-blogApp.service('mainBlogService', ['$location', '$resource',
-    function (location, resource) {
+blogApp.service('mainBlogService', ['$resource', 'urlService', function (resource, url) {
 	
         //return all entries
         this.get = function () {
-            var url = api.blogGet;
-            var blogJSON = resource(url);
-
+            var blogJSON = resource(url.blogGet);
             return blogJSON.get();
         };
     }
 ]);
+
+//validate user login cookies
+//if they are valid, return 1
+//else return 0
+blogApp.service('validateCookieService', ['$rootScope', '$cookies', '$resource', 'urlService', function (rootScope, cookies, resource, url) {
+    this.get = function () {
+        //read cookies
+        console.log("Service Here");
+        var user = cookies.get('user');
+        var pw = cookies.get('pw');
+		
+        //if no cookies, just immediately return false
+        if (user == null || pw == null || user == '' || pw == '') {
+            rootScope.loggedIn = false;
+            return;
+        }
+
+        var status = resource(url.userGet + "?user=" + user + "&pw=" + pw).get(function () {
+            if (status.status == true)
+                rootScope.loggedIn = true;
+            else
+                rootScope.loggedIn = false;
+        });
+    }
+}]);
+
+//URL variables stored here
+blogApp.service('urlService', function(){
+    this.blogGet = '/blog/api';
+    this.userGet = '/blog/auth';
+});
