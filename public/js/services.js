@@ -10,8 +10,7 @@ blogApp.service('mainBlogService', ['$resource', 'urlService', function (resourc
 ]);
 
 //validate user login cookies
-//if they are valid, return 1
-//else return 0
+//change rootScope variable to reflect this
 blogApp.service('validateCookieService', ['$rootScope', '$cookies', '$resource', 'urlService', function (rootScope, cookies, resource, url) {
     this.get = function () {
         //read cookies
