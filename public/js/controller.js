@@ -25,9 +25,15 @@ blogApp.controller('topBarLoginController', ['$scope', '$rootScope', 'validateCo
     });
 }]);
 
-//Take the RESTful query from blog service and populate blog.html
+//Get entries from REST API
 blogApp.controller('blogController', ['$scope', '$location', 'mainBlogService', function (scope, $location, blogService) {
-    //want to use the mainBlogService to get all the entries and populate the main page
+    //get entries from REST
     scope.entries = blogService.get();
 }]);
 
+//newPost redirects to / when rootScope.loggedIn is false
+blogApp.controller('newPostController', ['$rootScope', '$location', function(rootScope, location){
+    if(rootScope.loggedIn == false){
+        location.path('/');
+    }
+}]);

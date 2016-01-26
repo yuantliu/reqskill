@@ -14,7 +14,6 @@ blogApp.service('mainBlogService', ['$resource', 'urlService', function (resourc
 blogApp.service('validateCookieService', ['$rootScope', '$cookies', '$resource', 'urlService', function (rootScope, cookies, resource, url) {
     this.get = function () {
         //read cookies
-        console.log("Service Here");
         var user = cookies.get('user');
         var pw = cookies.get('pw');
 		

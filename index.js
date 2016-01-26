@@ -18,7 +18,7 @@ app.use('/public', express.static(__dirname + '/public'));
 
 
 //routes
-var blogapi = require('./app/routes/blog_main');
+var blogapi = require('./app/routes/blog_route');
 blogapi(app);
 
 

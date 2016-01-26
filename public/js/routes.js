@@ -5,7 +5,8 @@ blogApp.config(['$routeProvider', function (routeProvider) {
             controller: 'blogController'
         })
         .when('/newPost', {
-            templateUrl: '/public/html/newentry.html'
+            templateUrl: '/public/html/newentry.html',
+            controller: 'newPostController'
         })
         .when('/login', {
             templateUrl: 'public/html/login.html'
