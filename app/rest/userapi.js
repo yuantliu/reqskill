@@ -2,9 +2,6 @@
 var user = require('./connect_mongo.js').User;
 var domain = require('./../domain/variables');
 
-//hash library
-var crypto = require('crypto');
-
 module.exports = {
 	//given a username and password and whether the pw is hashed or not, validate
 	//return true if found
