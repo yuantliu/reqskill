@@ -32,7 +32,6 @@ blogApp.service('validateCookieService', ['$rootScope', '$cookies', '$resource',
     }
 }]);
 
-
 //URL variables stored here
 blogApp.service('urlService', function(){
     this.blogGet = '/blog/api';

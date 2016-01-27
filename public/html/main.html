@@ -28,6 +28,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right" cache-view="false" ng-controller="topBarLoginController">
                     <li><a href="{{post_link}}">{{link_text}}</a></li>
+                    <!-- Hide the logout element unless loggedIn in rootScope is true -->
+                    <li ng-show="loggedIn"><a href="" ng-click="logout()">Logout</a></li>
                 </ul>
             </div>
         </div>
