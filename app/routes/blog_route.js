@@ -2,6 +2,9 @@ var domain = require('./../domain/variables');
 var blogApi = require('./../rest/blogapi');
 var userApi = require('./../rest/userapi');
 
+//escaping input
+var validator = require('validator');
+//static files in file system
 var path = require('path');
 //hash library
 var crypto = require('crypto');
@@ -30,8 +33,8 @@ module.exports = function (app) {
         })
         .post(function (req, res) {
             //get and validate cookies first
-            var user = req.cookies.user;
-            var password = req.cookies.pw;
+            var user = validator.escape(req.cookies.user);
+            var password = validator.escape(req.cookies.pw);
             var query = userApi.validateUser(user, password);
             query.exec(function (err, result) {
                 if (err || result.length != 1) {
@@ -39,7 +42,7 @@ module.exports = function (app) {
                     res.cookie("user", "");
                     res.cookie("pw", "");
                 } else {
-                    blogApi.postEntry(req.body.title, new Date(), req.body.author, req.body.content);
+                    blogApi.postEntry(validator.escape(req.body.title), new Date(), validator.escape(req.body.author), validator.escape(req.body.content));
                 }
                 
                 res.redirect('/blog');
@@ -49,8 +52,8 @@ module.exports = function (app) {
     //login handler
     app.route('/blog/login')
         .get(function (req, res) {
-            var user = req.query.user;
-            var password = crypto.Hash('sha256').update(req.query.pw + domain.salt).digest('hex');
+            var user = validator.escape(req.query.user);
+            var password = crypto.Hash('sha256').update(validator.escape(req.query.pw) + domain.salt).digest('hex');
         
             //find user in db and set cookie if ok
             var query = userApi.validateUser(user, password);
@@ -68,8 +71,8 @@ module.exports = function (app) {
     //blog/auth?user=u&pw=p
     app.route('/blog/auth')
         .get(function (req, res) {
-            var user = req.query.user;
-            var password = req.query.pw;
+            var user = validator.escape(req.query.user);
+            var password = validator.escape(req.query.pw);
 
             var query = userApi.validateUser(user, password);
             query.exec(function (err, result) {

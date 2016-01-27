@@ -2,7 +2,7 @@
     
     <!-- Angular fills individual blog entries here -->
     <div id='entries' ng-repeat='i in entries.data'>
-        <blog-entry entry='i'>
+        <blog-entry entry='i' parse="parse(i)">
                
         </blog-entry>
     </div>

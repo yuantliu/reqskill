@@ -1,10 +1,22 @@
+<style>
+    div.posting {
+        white-space: pre-line;
+    }
+</style>
+
 <div class='list-group-item'>
     <h4>
         {{entry.title}}
     </h4>
     <b>
-        By: {{entry.author}}, post date: {{entry.date}}
+        By: {{entry.author}}
+    </b>
+    <br>
+    <b>
+        Date: {{entry.date}}
     </b>
     <hr>
+    <div class="posting">
         {{entry.post}}
+    </div>
 </div>

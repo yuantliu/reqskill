@@ -4,7 +4,10 @@ blogApp.directive('blogEntry', function(){
 		templateUrl: '../public/html/blog-entry.html',
 		restrict: 'AE',
 		scope: {
-			entry: '='
+            //make entry object available
+			entry: '=',
+            //make parseLine function available
+            parse: '&'
 		}
 	}
 });

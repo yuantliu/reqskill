@@ -8,8 +8,7 @@ blogApp.run(['$rootScope', 'validateCookieService', function (rootScope, validat
 }]);
 
 //app's root controller
-//parse cookies: if username and password are incorrect, wipe cookie, say "Login"
-//otherwise: say "New Post"
+//watches for rootscope's login status
 blogApp.controller('topBarLoginController', ['$scope', '$rootScope', 'validateCookieService', function (scope, rootScope, validateCookieService) {    
     //need to have loggedIn stored in rootScope so that blogApp.run will be able to access it.
     rootScope.loggedIn = false;
@@ -17,18 +16,24 @@ blogApp.controller('topBarLoginController', ['$scope', '$rootScope', 'validateCo
     rootScope.$watch('loggedIn', function () {
         if (rootScope.loggedIn == true) {
             scope.link_text = "New Post";
-            scope.link = "#newPost"
+            scope.post_link = "#newPost"
         } else {
             scope.link_text = "Login here";
-            scope.link = "#login";
+            scope.post_link = "#login";
         }
     });
 }]);
 
 //Get entries from REST API
-blogApp.controller('blogController', ['$scope', '$location', 'mainBlogService', function (scope, $location, blogService) {
+blogApp.controller('blogController', ['$scope', '$location', 'mainBlogService', function (scope, location, blogService) {
     //get entries from REST
     scope.entries = blogService.get();
+    
+    //function for replacing \r\n with <br>
+    scope.parse = function(input){
+        if(input != null)
+            return input.replace(/\r\n/g, "<br>");
+    }
 }]);
 
 //newPost redirects to / when rootScope.loggedIn is false
