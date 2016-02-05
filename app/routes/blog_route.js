@@ -16,12 +16,10 @@ module.exports = function (app) {
         res.sendFile(path.join(__dirname + '../../../public/html/main.html'));
     });
 
-    //retrieve blog entries
-
-    //have to pass in res for api to send response back for now due to asynchronous function issues
+    // blog entry related REST calls
     app.route('/blog/api')
         .get(function (req, res) {
-            var query = blogApi.getEntry();
+            var query = blogApi.getEntries();
             query.exec(function (err, data) {
                 if (err) {
                     console.log("Error in GET blog");
@@ -44,8 +42,30 @@ module.exports = function (app) {
                 } else {
                     blogApi.postEntry(validator.escape(req.body.title), new Date(), validator.escape(req.body.author), validator.escape(req.body.content));
                 }
-                
+
                 res.redirect('/blog');
+            });
+        });
+
+    app.route('/blog/api/:_id')
+        .delete(function (req, res) {
+            //get and validate cookies first
+            //get and validate cookies first
+            var user = validator.escape(req.cookies.user);
+            var password = validator.escape(req.cookies.pw);
+            var query = userApi.validateUser(user, password);
+            query.exec(function (err, result) {
+                if (err || result.length != 1) {
+                    //reset bad cookies
+                    res.cookie("user", "");
+                    res.cookie("pw", "");
+                } else {
+                    //delete entry
+                    var query = blogApi.getEntry(req.params._id);
+                    query.remove(function(err1, result1){
+                        res.redirect('/blog');
+                    });
+                }
             });
         });
 

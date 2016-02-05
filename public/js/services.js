@@ -1,11 +1,16 @@
-//use REST API to get blog entries
+//REST interfaces
 blogApp.service('mainBlogService', ['$resource', 'urlService', function (resource, url) {
-	
         //return all entries
         this.get = function () {
-            var blogJSON = resource(url.blogGet);
-            return blogJSON.get();
+            var getResource = resource(url.blog);
+            return getResource.get();
         };
+        
+        //delete an entry given an _id
+        this.delete = function(_id){
+            var deleteResource = resource(url.blog + "/" + _id);
+            return deleteResource.delete();
+        }
     }
 ]);
 
@@ -23,7 +28,7 @@ blogApp.service('validateCookieService', ['$rootScope', '$cookies', '$resource',
             return;
         }
 
-        var status = resource(url.userGet + "?user=" + user + "&pw=" + pw).get(function () {
+        var status = resource(url.user + "?user=" + user + "&pw=" + pw).get(function () {
             if (status.status == true)
                 rootScope.loggedIn = true;
             else
@@ -34,6 +39,6 @@ blogApp.service('validateCookieService', ['$rootScope', '$cookies', '$resource',
 
 //URL variables stored here
 blogApp.service('urlService', function(){
-    this.blogGet = '/blog/api';
-    this.userGet = '/blog/auth';
+    this.blog = '/blog/api';
+    this.user = '/blog/auth';
 });

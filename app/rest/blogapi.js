@@ -3,8 +3,13 @@ var blog = require('./connect_mongo.js');
 var mongoose = require('mongoose');
 
 module.exports = {
-	getEntry : function(){ 
+	getEntries : function(){ 
         var query = blog.BlogEntry.find({}).sort({date: -1});
+        return query;
+    },
+    
+    getEntry : function(id){
+        var query = blog.BlogEntry.find({"_id": id});
         return query;
     },
     

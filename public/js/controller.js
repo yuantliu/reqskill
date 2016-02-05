@@ -29,6 +29,8 @@ blogApp.controller('topBarLoginController', ['$scope', '$cookies', '$rootScope',
         rootScope.loggedIn = false;
     };
     
+    rootScope.hello = "Hallo!";
+    
 }]);
 
 //Get entries from REST API
@@ -36,10 +38,10 @@ blogApp.controller('blogController', ['$scope', '$location', 'mainBlogService', 
     //get entries from REST
     scope.entries = blogService.get();
     
-    //function for replacing \r\n with <br>
-    scope.parse = function (input) {
-        if (input != null)
-            return input.replace(/\r\n/g, "<br>");
+    //function for deleting a post given an _id
+    scope.delete = function(_id){
+        console.log("DELETING STUFF");
+        blogService.delete(_id);
     }
 }]);
 

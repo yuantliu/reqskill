@@ -2,9 +2,13 @@
     div.posting {
         white-space: pre-line;
     }
+    div.delete {
+        text-align: right;
+    }
 </style>
 
 <div class='list-group-item'>
+    
     <h4>
         {{entry.title}}
     </h4>
@@ -18,5 +22,8 @@
     <hr>
     <div class="posting">
         {{entry.post}}
+    </div>
+    <div class="delete" ng-show="loggedIn">
+        <a href="" ng-click="delete({id: entry._id})"> Delete </a>
     </div>
 </div>
