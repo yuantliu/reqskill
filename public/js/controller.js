@@ -39,12 +39,19 @@ blogApp.controller('blogController', ['$scope', '$location', 'mainBlogService', 
     scope.entries = blogService.get();
     
     //function for deleting a post given an _id
-    scope.delete = function(_id){
-        console.log("DELETING STUFF");
-        blogService.delete(_id);
+    scope.delete = function (_id) {
+        blogService.delete(_id,
+            function (response) {
+                //get entries again from REST
+                if(response.success){ scope.entries = blogService.get(); }
+                    
+            },
+            function () {
+                console.log("Failed to delete entry");
+            }
+        );
     }
 }]);
-
 //newPost redirects to / when rootScope.loggedIn is false
 blogApp.controller('newPostController', ['$rootScope', '$location', function (rootScope, location) {
     if (rootScope.loggedIn == false) {

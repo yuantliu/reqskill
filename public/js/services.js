@@ -6,10 +6,10 @@ blogApp.service('mainBlogService', ['$resource', 'urlService', function (resourc
             return getResource.get();
         };
         
-        //delete an entry given an _id
-        this.delete = function(_id){
-            var deleteResource = resource(url.blog + "/" + _id);
-            return deleteResource.delete();
+        //delete an entry given an id
+        this.delete = function(id, successCallback, failureCallback){
+            var deleteResource = resource(url.blog + "/:entryId", {entryId: '@id'});
+            return deleteResource.delete({entryId: id}, successCallback, failureCallback);
         }
     }
 ]);

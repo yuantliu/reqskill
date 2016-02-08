@@ -63,7 +63,11 @@ module.exports = function (app) {
                     //delete entry
                     var query = blogApi.getEntry(req.params._id);
                     query.remove(function(err1, result1){
-                        res.redirect('/blog');
+                        if(!err1){
+                            res.end(JSON.stringify({success: true}));
+                        } else {
+                            res.end(JSON.stringify({success: false}));
+                        }
                     });
                 }
             });
