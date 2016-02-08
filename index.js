@@ -12,10 +12,12 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: false}));
 //cookie parser
 app.use(cookieParser());
-//app.use(express.cookieParser());
-//static files
-app.use('/public', express.static(__dirname + '/public'));
 
+//static files for blog
+app.use('/public/blog/', express.static(__dirname + '/public/blog/'));
+
+//shared static files (front-end libs)
+app.use('/public/lib/', express.static(__dirname + '/public/lib'));
 
 //routes
 var blogapi = require('./app/routes/blog_route');
