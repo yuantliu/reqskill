@@ -19,8 +19,7 @@
     "compression": "^1.6.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.3",
-    "kerberos": "0.0.17",
-    "mongoose": "^4.3.4",
+    "mongoose": "4.4.2",
     "request-json": "^0.5.5",
     "validator": "^4.5.1"
   }
