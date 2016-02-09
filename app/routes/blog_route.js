@@ -1,4 +1,3 @@
-var domain = require('./../domain/variables');
 var blogApi = require('./../rest/blogapi');
 var userApi = require('./../rest/userapi');
 

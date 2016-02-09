@@ -1,4 +1,4 @@
 #directories to ignore
 bower_components/
 node_modules/
-app/domain/variables.js
+app/domain/

@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+var db = require('../domain/database');
 var Schema = mongoose.Schema;
 
-mongoose.connect('mongodb://localhost/test', function (err, res) {
+mongoose.connect(db.url, function (err, res) {
 	if (err) {
 		console.log("Can't connect to mongodb");
 	}
