@@ -81,14 +81,17 @@ module.exports = function (app) {
     app.route('/blog/login')
         .get(function (req, res) {
             var user = validator.escape(req.query.user);
-            var password = crypto.Hash('sha256').update(validator.escape(req.query.pw) + domain.salt).digest('hex');
         
             //find user in db and set cookie if ok
-            var query = userApi.validateUser(user, password);
-            query.exec(function (err, result) {
+            var query = userApi.validateUser(user);
+            query.exec(function (err, result) {                
                 if (!err && result.length == 1) {
-                    res.cookie("user", result[0].user);
-                    res.cookie("pw", result[0].password);
+                    //HASH(password + salt)
+                    var hash_saltpw = crypto.Hash('sha256').update(validator.escape(req.query.pw) + result[0].salt).digest('hex');
+                    if(hash_saltpw == result[0].password){
+                        res.cookie("user", result[0].user);
+                        res.cookie("pw", result[0].password);
+                    }
                 }
 
                 res.redirect('/blog');
@@ -99,18 +102,19 @@ module.exports = function (app) {
     //blog/auth?user=u&pw=p
     app.route('/blog/auth')
         .get(function (req, res) {
+            //pw is already hashed with salt
             var user = validator.escape(req.query.user);
-            var password = validator.escape(req.query.pw);
-
-            var query = userApi.validateUser(user, password);
-            query.exec(function (err, result) {
-                if (err || result.length != 1) {
-                    //reset bad cookies
+            var pw = validator.escape(req.query.pw);
+            
+            //find user in db
+            var query = userApi.validateUser(user);
+            query.exec(function (err, result) {          
+                if (!err && result.length == 1 && pw == result[0].password) {
+                    res.end(JSON.stringify({ "status": true }));
+                } else {
                     res.cookie("user", "");
                     res.cookie("pw", "");
                     res.end(JSON.stringify({ "status": false }));
-                } else {
-                    res.end(JSON.stringify({ "status": true }));
                 }
             });
         });

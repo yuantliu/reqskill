@@ -6,10 +6,9 @@ module.exports = {
 	//given a username and password and whether the pw is hashed or not, validate
 	//return true if found
 	//return false if not found
-	validateUser: function (usr, pw) {
+	validateUser: function (usr) {
         var query = user.find({
-			'user': usr,
-			'password': pw
+			'user': usr
 		});
         
         return query;

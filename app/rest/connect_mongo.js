@@ -8,21 +8,22 @@ mongoose.connect('mongodb://localhost/test', function (err, res) {
 });
 
 //pass in the second object specifying the collection name
-//might have something to do with the fact that this collection didnt exist before
+//might have something to do with the fact that this collection existed before
 var blogSchema = new Schema({
 	title: String,
 	date: {type: Date, default: Date.now},
 	author: String,
 	post: String
 }, {
-	collection: 'entry'
+	collection: 'entries'
 });
 
 var userSchema = new Schema({
     user: String,
-    password: String
+    password: String,
+    salt: String
 }, {
-    collection: 'user' 
+    collection: 'users' 
 });
 
 var BlogEntry = mongoose.model('MyEntry', blogSchema);
