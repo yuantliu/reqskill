@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var db = require('../domain/database');
+var db = require('../domain/keys');
 var Schema = mongoose.Schema;
 
-mongoose.connect(db.url, function (err, res) {
+mongoose.connect(db.db_url, function (err, res) {
 	if (err) {
 		console.log("Can't connect to mongodb");
 	}
@@ -10,6 +10,8 @@ mongoose.connect(db.url, function (err, res) {
 
 //pass in the second object specifying the collection name
 //might have something to do with the fact that this collection existed before
+
+//blog collections
 var blogSchema = new Schema({
 	title: String,
 	date: {type: Date, default: Date.now},
@@ -27,7 +29,17 @@ var userSchema = new Schema({
     collection: 'users' 
 });
 
+//app collections
+var statusSchema = new Schema({
+    city: String,
+    country: String,
+    status: Boolean
+}, {
+    collection: 'status'
+})
+
 var BlogEntry = mongoose.model('MyEntry', blogSchema);
 var User = mongoose.model('User', userSchema);
+var Status = mongoose.model('Status', statusSchema);
 
-module.exports = { "BlogEntry": BlogEntry, "User": User };
+module.exports = { "BlogEntry": BlogEntry, "User": User, "Status": Status };

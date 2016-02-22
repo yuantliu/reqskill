@@ -22,6 +22,8 @@ app.use('/public/lib/', express.static(__dirname + '/public/lib'));
 //routes
 var blogapi = require('./app/routes/blog_route');
 blogapi(app);
+var appapi = require('./app/routes/app_route');
+appapi(app);
 
 
 app.listen(port, function(err){

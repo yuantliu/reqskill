@@ -1,22 +1,22 @@
 //get mongo connection for blog's 'entry' collection
-var blog = require('./connect_mongo.js');
+var db = require('./connect_mongo.js');
 var mongoose = require('mongoose');
 
 module.exports = {
 	getEntries : function(){ 
-        var query = blog.BlogEntry.find({}).sort({date: -1});
+        var query = db.BlogEntry.find({}).sort({date: -1});
         return query;
     },
     
     getEntry : function(id){
-        var query = blog.BlogEntry.find({"_id": id});
+        var query = db.BlogEntry.find({"_id": id});
         return query;
     },
     
     postEntry : function(title, date, author, content){
         //todo: check cookies for user authentication
         
-        var newentry = new blog.BlogEntry({
+        var newentry = new db.BlogEntry({
             title: title,
             date: date,
             author: author,
