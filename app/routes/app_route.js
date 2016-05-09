@@ -4,6 +4,7 @@ var indeedKey = require('./../domain/keys').indeed_key;
 var openweatherKey = require('./../domain/keys').openweather_key;
 var cheerio = require('cheerio');
 var async = require('async');
+var math = require('mathjs');
 
 //escaping input
 var validator = require('validator');
@@ -16,6 +17,7 @@ var term1 = "developer";
 var searchTerm = require('./../domain/searchterms').terms;
 
 //given an iteration number, return a function that would navigate to that iteration's Indeed API page and give the callback an array of links
+//flip the pages so to speak
 var flip = function (city, country, days, i) {
     return function (callback) {
         request(`http://api.indeed.com/ads/apisearch?publisher=${indeedKey}&format=json&q=${term1}&l=${city}&co=${country}&sort=&radius=&st=&jt=&start=${i * 25}&limit=25&fromage=${days}&filter=&chnl=&userip=1.2.3.4&v=2`, function (e, r, b) {
@@ -45,6 +47,7 @@ var flip = function (city, country, days, i) {
 var extract = function (url, counter) {
     return function (callback) {
         request(url, function (error, response, body) {
+            
             //error checking if a page has problems
             if(body == null || error != null){
                 console.log("Error encountered at " + url);
@@ -76,7 +79,11 @@ var extract = function (url, counter) {
                 }
             }
             
-            callback(null, null);
+            setTimeout(function(){
+                callback(null, null);
+            }, math.randomInt(500, 1500));
+            
+            
         });
     }
 }
@@ -131,7 +138,7 @@ module.exports = function (app) {
                             extractQueue.push(extract(url[i], count));
                         }
                         
-                        async.parallel(extractQueue, function(err, results){
+                        async.series(extractQueue, function(err, results){
                             //results are in skill results
                             //pass via callback
                             callback(null, count);
