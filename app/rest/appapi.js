@@ -1,5 +1,5 @@
 //get mongo connection
-var db = require('./connect_mongo.js');
+var db = require('./connect_mongo_city.js');
 var mongoose = require('mongoose');
 
 module.exports = {

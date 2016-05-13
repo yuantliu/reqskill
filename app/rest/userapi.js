@@ -1,5 +1,5 @@
 //get mongo connection for blog's 'entry' collection
-var user = require('./connect_mongo.js').User;
+var user = require('./connect_mongo_blog.js').User;
 
 module.exports = {
 	//given a username and password and whether the pw is hashed or not, validate
