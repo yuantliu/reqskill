@@ -1,5 +1,5 @@
 //get mongo connection for blog's 'entry' collection
-var db = require('./connect_mongo_blog.js');
+var db = require('./connect_mongo_blog');
 var mongoose = require('mongoose');
 
 module.exports = {

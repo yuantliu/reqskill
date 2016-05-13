@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 var db = require('../domain/keys');
 var Schema = mongoose.Schema;
 
-mongoose.connect(db.db_url, function (err, res) {
+mongoose.createConnection(db.db_blog_url, function (err, res) {
 	if (err) {
 		console.log("Can't connect to mongodb for blog");
+        console.log(err);
 	}
 });
 

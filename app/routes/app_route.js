@@ -150,7 +150,7 @@ module.exports = function (app) {
                     //then execute the functions in extractFunctionQueue by executing extractFunction
                     async.waterfall([flipFunction, extractFunction], function(err, result){
                         //output the skill_results
-                        console.log(result);
+                        res.end(result);
                     });
 
                     res.end(indeed_search_body);
