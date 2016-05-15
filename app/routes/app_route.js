@@ -14,13 +14,13 @@ var validator = require('validator');
 //search term for indeed
 var term1 = "developer";
 
-var searchTerm = require('./../domain/searchterms').terms;
+var searchTerm = require('./../domain/searchterms');
 
 //given an iteration number, return a function that would navigate to that iteration's Indeed API page and give the callback an array of links
 //flip the pages so to speak
 var flip = function (city, country, days, i) {
     return function (callback) {
-        request(`http://api.indeed.com/ads/apisearch?publisher=${indeedKey}&format=json&q=${term1}&l=${city}&co=${country}&sort=&radius=&st=&jt=&start=${i * 25}&limit=25&fromage=${days}&filter=&chnl=&userip=1.2.3.4&v=2`, function (e, r, b) {
+        request(`http://api.indeed.com/ads/apisearch?publisher=${indeedKey}&format=json&q=${term1}&l=${city}&co=${country}&sort=&radius=&st=&jt=&start=${i * 25}&limit=25&fromage=${days}&filter=&chnl=&userip=1.2.3.4&v=2&latlong=1`, function (e, r, b) {
             var links = [];
 
             if (!e && b!= null || b!= undefined) {
@@ -69,12 +69,13 @@ var extract = function (url, counter) {
             body = body.toLowerCase();
        
             //count by reading the terms in /app/domain/searchterms.js
-            for (var i = 0; i < searchTerm.length; i++) {
-                if (body.indexOf(searchTerm[i]) > -1) {
-                    if(counter[searchTerm[i]] != undefined && counter[searchTerm[i]] > 0)
-                        counter[searchTerm[i]]++;
+            for (var i = 0; i < searchTerm.term.length; i++) {
+                if (body.search(searchTerm.term[i] + searchTerm.regexend) > -1) {
+                    if(counter[searchTerm.term[i]] != undefined && counter[searchTerm.term[i]] > 0){
+                        counter[searchTerm.term[i]]++;
+                    }
                     else {
-                        counter[searchTerm[i]] = 1;
+                        counter[searchTerm.term[i]] = 1;
                     }
                 }
             }
@@ -82,8 +83,6 @@ var extract = function (url, counter) {
             setTimeout(function(){
                 callback(null, null);
             }, math.randomInt(500, 1500));
-            
-            
         });
     }
 }
@@ -150,7 +149,7 @@ module.exports = function (app) {
                     //then execute the functions in extractFunctionQueue by executing extractFunction
                     async.waterfall([flipFunction, extractFunction], function(err, result){
                         //output the skill_results
-                        res.end(result);
+                        console.log(result);
                     });
 
                     res.end(indeed_search_body);
