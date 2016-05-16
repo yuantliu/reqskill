@@ -13,6 +13,7 @@ var validator = require('validator');
 
 //search term for indeed
 var term1 = "developer";
+var term2 = "software"; 
 
 var searchTerm = require('./../domain/searchterms');
 
@@ -20,7 +21,7 @@ var searchTerm = require('./../domain/searchterms');
 //flip the pages so to speak
 var flip = function (city, country, days, i) {
     return function (callback) {
-        request(`http://api.indeed.com/ads/apisearch?publisher=${indeedKey}&format=json&q=${term1}&l=${city}&co=${country}&sort=&radius=&st=&jt=&start=${i * 25}&limit=25&fromage=${days}&filter=&chnl=&userip=1.2.3.4&v=2&latlong=1`, function (e, r, b) {
+        request(`http://api.indeed.com/ads/apisearch?publisher=${indeedKey}&format=json&q=${term2}&q=${term1}&l=${city}&co=${country}&sort=&radius=&st=&jt=&start=${i * 25}&limit=25&fromage=${days}&filter=&chnl=&userip=1.2.3.4&v=2&latlong=1`, function (e, r, b) {
             var links = [];
 
             if (!e && b!= null || b!= undefined) {
@@ -81,8 +82,9 @@ var extract = function (url, counter) {
             }
             
             setTimeout(function(){
+                console.log("Reading");
                 callback(null, null);
-            }, math.randomInt(500, 1500));
+            }, math.randomInt(1, 2));
         });
     }
 }
