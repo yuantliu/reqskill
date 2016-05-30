@@ -7,5 +7,8 @@ mongoose.createConnection(db.db_city_url, function (err, res) {
 		console.log("Can't connect to mongodb for cities");
 		console.log(err);
 	}
+}).on('connected', function(){
+	console.log("City db connection established");
 });
 
+//
