@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+    <script src="/public/search/js/angularapp.js"></script>
+    <script src="/public/search/js/controller.js"></script>
+    <script src="/public/search/js/routes.js"></script>
+    <script src="/public/search/js/directives.js"></script>
+    <script src="/public/search/js/services.js"></script>
+</head>
+
+<body ng-app="searchApp">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Title -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">Reqskills</a>
+            </div>
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" cache-view="false">
+                    <li><a href="/blog">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div ng-view>
+            <!-- Angular fills this part with city_input.html -->
+        </div>
+    </div>
+
+
+</body>
+
+</html>

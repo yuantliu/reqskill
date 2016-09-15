@@ -1,0 +1,32 @@
+<h2>
+	Skill Summary Page for {{city}}
+</h2>
+
+<a href="/">Back to home</a>
+
+<br>
+	<h4>Days: 
+		<a href="/search/{{city}}/7" ng-class='{"bg-primary": days == 7}'>7</a> | 
+		<a href="/search/{{city}}/14" ng-class='{"bg-primary": days == 14}'>14</a> | 
+		<a href="/search/{{city}}/28" ng-class='{"bg-primary": days == 28}'>28</a>
+	</h4>
+<br>
+
+<div class='list-group'>
+    <div id='message' ng-show="mydata.$resolved==false">
+        <h4>
+            Retrieving data. Please stand by.
+        </h4>
+    </div>
+    <div id='results' ng-show="mydata.$resolved==true">
+	
+        <h4>
+            Search results for {{city}}, {{mydata.country}} for the previous {{days}} day(s):
+        </h4>
+        <div id='results' ng-repeat="i in mydata.data">
+            <skill-info skill="i">
+                <!-- skill summary here -->
+            </skill-info>
+        </div>
+	</div>
+</div>
