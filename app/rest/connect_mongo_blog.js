@@ -35,17 +35,7 @@ var userSchema = new Schema({
     collection: 'users' 
 });
 
-//app collections
-var statusSchema = new Schema({
-    city: String,
-    country: String,
-    status: Boolean
-}, {
-    collection: 'status'
-})
-
 var BlogEntry = blogConnection.model('MyEntry', blogSchema);
 var User = blogConnection.model('User', userSchema);
-var Status = blogConnection.model('Status', statusSchema);
 
-module.exports = { "BlogEntry": BlogEntry, "User": User, "Status": Status };
+module.exports = { "BlogEntry": BlogEntry, "User": User};

@@ -2,8 +2,6 @@
 var db = require('./connect_mongo_blog').BlogEntry;
 var mongoose = require('mongoose');
 
-var Entries = db.BlogEntry;
-
 module.exports = {
 	getEntries : function(){ 
         var query = db.find({}).sort({date: -1});

@@ -97,8 +97,6 @@ module.exports = function (app) {
     app.route('/api/search/:_city/:_days')
         .get(function (req, res) {
 
-            console.log(req + " has come in");
-
             //escape input
             var city = validator.escape(req.params._city);
             var days = parseInt(validator.escape(req.params._days));
