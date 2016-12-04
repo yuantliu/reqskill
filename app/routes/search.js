@@ -91,12 +91,19 @@ var extract = function (url, counter) {
 
 module.exports = function (app) {
 
+    //race condition
+    var locks = {};
+
     app.route('/api/search/:_city/:_days')
         .get(function (req, res) {
+
             //escape input
             var city = validator.escape(req.params._city);
             var days = parseInt(validator.escape(req.params._days));
             var country = '';
+
+            //race condition
+            locks[city] = true;
             
             //find the country for a given city by using the openweathermap api
             request(`http://api.openweathermap.org/data/2.5/forecast/daily?appid=${openweatherKey}&cnt=1&q=${city}`, function (error, response, weather_body) {
@@ -164,6 +171,8 @@ module.exports = function (app) {
                         }
                         
                         result["data"] = data;
+
+                        locks 
 
                         res.end(JSON.stringify(result));
                     });

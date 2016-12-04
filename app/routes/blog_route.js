@@ -16,7 +16,7 @@ module.exports = function (app) {
         destination: root/public/blog/html/file.html
     */
     app.route('/blog').get(function (req, res) {
-        res.sendFile(path.join(__dirname + '../../../public/blog/html/main.html'));
+        res.sendFile(path.join(__dirname + '/../../public/blog/html/main.html'));
     });
 
     // blog entry related REST calls
