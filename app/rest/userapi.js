@@ -6,6 +6,7 @@ module.exports = {
 	//return true if found
 	//return false if not found
 	validateUser: function (usr) {
+		console.log(usr);
         var query = user.find({
 			'user': usr
 		});

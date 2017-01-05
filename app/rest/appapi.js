@@ -20,15 +20,28 @@ module.exports = {
         return db.find({"city": city, "country": country});
     },
     
-    updateCityData : function(id, newData){
-        var query = db.find({"_id": id});
-        db.findOneAndUpdate(query, newData, function(err, res){
-            if(err){
-                console.log("Error during city update");
-                console.log(err);
-            } else {
-                console.log("City updated successfully");
-            }
-        })
+    updateCityData : function(newData, id){
+        //for when id != null
+        //ie just updating
+        if(id != null){
+            var query = db.find({"_id": id});
+            db.findOneAndUpdate(query, newData, function(err, res){
+                if(err){
+                    console.log("Error during city update");
+                    console.log(err);
+                } else {
+                    console.log("City updated successfully");
+                }
+            })
+        } else {
+            var newentry = new db({
+                city: newData.city,
+                country: newData.country,
+                updated: newData.updated,
+                data: newData.data
+            });
+            db.save(newData);
+        }
+        
     },
 };

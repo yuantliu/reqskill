@@ -20,7 +20,7 @@ cityConnection.on('connected', function(){
 var citySchema = mongoose.Schema({
 	city: String,
 	country: String,
-	lastUpdated: String,
+	updated: String,
 	data: [Schema.Types.Mixed] //array will be {<date>: {java: 3, nodejs: 5}}
 }, {
 	collection: 'cities'
