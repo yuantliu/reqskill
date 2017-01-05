@@ -192,7 +192,7 @@ var getRequest = function (city, days, country) {
                 for(var i = 0; i < results.length; i++){
                     //get the date
                     var date = (Object.keys(results[i]))[0];
-                    if(date in result == false){
+                    if(result[date] == undefined){
                         result[date] = {};
                     }
                     
@@ -200,10 +200,10 @@ var getRequest = function (city, days, country) {
                     var skills = Object.keys(results[i][date]);
                     if(skills.length > 0){
                         for(var j = 0; j < skills.length; j++){
-                            if(skills[j] in result[date] == true){
-                                result[date][skills[j]] += results[i][date][skills[j]];
-                            } else {
+                            if(result[date][skills[j]] == undefined){
                                 result[date][skills[j]] = results[i][date][skills[j]];
+                            } else {
+                                result[date][skills[j]] += results[i][date][skills[j]];
                             }
                         }
                     }
