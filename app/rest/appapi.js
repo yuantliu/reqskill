@@ -27,8 +27,7 @@ module.exports = {
             var query = db.find({"_id": id});
             db.findOneAndUpdate(query, newData, function(err, res){
                 if(err){
-                    console.log("Error during city update");
-                    console.log(err);
+                    console.log("Error during city update: " + err);
                 } else {
                     console.log("City updated successfully");
                 }
@@ -40,7 +39,14 @@ module.exports = {
                 updated: newData.updated,
                 data: newData.data
             });
-            db.save(newData);
+
+            newentry.save(function(err, data){
+                if(err){
+                    console.log("Error during POST: " + err);
+                } else {
+                    console.log("City added successfully");
+                }
+            })
         }
         
     },

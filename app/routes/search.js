@@ -1,4 +1,3 @@
-var appApi = require('./../rest/appapi');
 var request = require('request');
 var indeedKey = require('./../domain/keys').indeed_key;
 var MAX_DAYS = require('./../domain/keys').MAX_DAYS;
@@ -276,6 +275,11 @@ module.exports = function (app) {
 
                         async.series([getRequest(city, days, country)], function(error, data){
                             //data has the JSON
+                            city_data["data"] = data;
+                            city_data["updated"] = moment(new Date());
+                            console.log(city_data);
+                            cityApi.updateCityData(city_data, null);
+                            console.log(city + " has been updated on " + city_data["updated"].format('YYYY-mm-dd'));
                         });
                         
                     }
